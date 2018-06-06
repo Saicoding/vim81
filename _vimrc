@@ -1,7 +1,19 @@
+" Lang & Encoding {{{
+
+set encoding=utf-8
+set termencoding=utf-8
+set fileencodings=utf-8,gbk2312,gbk,gb18030,cp936
+set langmenu=zh_CN.UTF-8
+language message zh_CN.UTF-8
+set fileencodings=utf-8,gbk2312,gbk,gb18030,cp936
+let $LANG='en_US.UTF-8'
+
+" }}}
+" =====================================================================================================================================
 " Startup {{{
 
-filetype indent plugin on " ¿ªÆôÎÄ¼şÀàĞÍ¼ì²â
-" vim ÎÄ¼şÕÛµş·½Ê½Îª marker
+filetype indent plugin on " å¼€å¯æ–‡ä»¶ç±»å‹æ£€æµ‹
+" vim æ–‡ä»¶æŠ˜å æ–¹å¼ä¸º marker
 augroup ft_vim
     au!
     au FileType vim setlocal foldmethod=marker
@@ -9,54 +21,65 @@ augroup END
 
 exec 'cd ' . fnameescape('F:\WorkPlace\Python\python\AutoBaikeProject')
 set autochdir
-
 " }}}
 " =====================================================================================================================================
 " KeyMap {{{
 
 let mapleader="\<Space>"
 
-map <leader>tn :tabnew<cr> " ĞÂ±êÇ©
+map <leader>tn :tabnew<cr> " æ–°æ ‡ç­¾
+map <leader>t :TlistToggle<cr> " åˆ‡æ¢Tlist
+map <leader>cmd :!start<cr> " æ‰“å¼€å½“å‰ç›®å½•cmd
 map <C-c> "+y
-map <leader>t :TlistToggle<cr> " ÇĞ»»Tlist
-map <leader>cmd :!start<cr> " ´ò¿ªµ±Ç°Ä¿Â¼cmd
-map <F3> a<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc> "´òÓ¡µ±Ç°Ê±¼ä
-map <F2> :NERDTreeToggle<CR> " ÇĞ»»Ä¿Â¼
-map <M-y> :tabp<CR> " ÉÏÒ»¸ö±êÇ©
-map <M-u> :tabn<CR> " ÏÂÒ»¸ö±êÇ©
-
+map <F3> a<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc> "æ‰“å°å½“å‰æ—¶é—´
+map <M-3> :NERDTreeToggle<CR> " åˆ‡æ¢ç›®å½•
+map <M-y> :tabn<CR> " ä¸Šä¸€ä¸ªæ ‡ç­¾
+map <M-u> :tabp<CR> " ä¸‹ä¸€ä¸ªæ ‡ç­¾
+map <M-w> :q<CR> " å…³é—­æ ‡ç­¾
 imap <C-v> "+gP 
-inoremap jj <esc> " jjÍË³ö±à¼­Ä£Ê½
-inoremap <C-BS> <Esc>bdei " É¾³ıµ±Ç°´Ê
-inoremap <M-j> <Down>
-inoremap <M-k> <Up>
+inoremap jj <esc> :w!<CR> " jjé€€å‡ºç¼–è¾‘æ¨¡å¼
+inoremap <C-BS> <Esc>bdei " åˆ é™¤å½“å‰è¯
+inoremap <silent><M-j> <Down>
+inoremap <A-k> <Up>
 inoremap <M-h> <left>
 inoremap <M-l> <Right>
 inoremap <S-CR> <HOME><CR>
 inoremap <C-CR> <END><CR><UP> 
 
-nmap <leader>s :source $VIM/_vimrc<cr>
+nmap <leader>v :source $VIM/_vimrc<cr>
 nmap <leader>e :e $VIM/_vimrc<cr>
-nmap <C-j> <C-W>j " ÒÆ¶¯·Ö¸î´°¿Ú
-nmap <C-k> <C-W>k " ÒÆ¶¯·Ö¸î´°¿Ú
-nmap <C-h> <C-W>h " ÒÆ¶¯·Ö¸î´°¿Ú
-nmap <C-l> <C-W>l " ÒÆ¶¯·Ö¸î´°¿Ú 
+nmap <C-j> <C-W>j " ç§»åŠ¨åˆ†å‰²çª—å£
+nmap <C-k> <C-W>k " ç§»åŠ¨åˆ†å‰²çª—å£
+nmap <C-h> <C-W>h " ç§»åŠ¨åˆ†å‰²çª—å£
+nmap <C-l> <C-W>l " ç§»åŠ¨åˆ†å‰²çª—å£ 
 
-" Õı³£Ä£Ê½ÏÂ alt+j,k,h,l µ÷Õû·Ö¸î´°¿Ú´óĞ¡
-nnoremap <leader>w :set wrap!<cr> " ÉèÖÃ»»ĞĞ·½Ê½
+" æ­£å¸¸æ¨¡å¼ä¸‹ alt+j,k,h,l è°ƒæ•´åˆ†å‰²çª—å£å¤§å°
+nnoremap <leader>w :set wrap!<cr> " è®¾ç½®æ¢è¡Œæ–¹å¼
 nnoremap <M-j> :resize +5<cr>
 nnoremap <M-k> :resize -5<cr>
 nnoremap <M-h> :vertical resize -5<cr>
 nnoremap <M-l> :vertical resize +5<cr>
-nnoremap <C-left> :bn<CR> "ÇĞ»»Buffer×´Ì¬
-nnoremap <C-right> :bp<CR>  "ÇĞ»»Buffer×´Ì¬ 
-nnoremap zj :w<CR> " ±£´æµ±Ç°ÎÄ¼ş
-nnoremap <M-d> <C-d> " ÏÂ·­£¨£©
-nnoremap <M-f> <C-f> "ÏÂ·­£¨£©"
-nnoremap <M-i> <C-u> "ÉÏ·­£¨£©"
-nnoremap <M-o> <C-b> "ÉÏ·­£¨£©"
-nnoremap <S-CR> O<ESC> " ÔÚÉÏÃæ¼ÓÈë¿ÕĞĞ
-nnoremap <C-CR> o<ESC><UP> " ÔÚÉÏÃæ¼ÓÈë¿ÕĞĞ
+nnoremap <C-left> :bn<CR> "åˆ‡æ¢BufferçŠ¶æ€
+nnoremap <C-right> :bp<CR>  "åˆ‡æ¢BufferçŠ¶æ€ 
+nnoremap zj :w!<CR> " ä¿å­˜å½“å‰æ–‡ä»¶
+nnoremap <M-d> <C-d> " ä¸‹ç¿»ï¼ˆï¼‰
+nnoremap <M-f> <C-f> "ä¸‹ç¿»ï¼ˆï¼‰"
+nnoremap <M-i> <C-u> "ä¸Šç¿»ï¼ˆï¼‰"
+nnoremap <M-o> <C-b> "ä¸Šç¿»ï¼ˆï¼‰"
+nnoremap <S-CR> O<ESC> " åœ¨ä¸Šé¢åŠ å…¥ç©ºè¡Œ
+nnoremap <C-CR> o<ESC><UP> " åœ¨ä¸Šé¢åŠ å…¥ç©ºè¡Œ
+noremap <silent><leader>1 :tabn 1<cr>
+noremap <silent><leader>2 :tabn 2<cr>
+noremap <silent><leader>3 :tabn 3<cr>
+noremap <silent><leader>4 :tabn 4<cr>
+noremap <silent><leader>5 :tabn 5<cr>
+noremap <silent><leader>6 :tabn 6<cr>
+noremap <silent><leader>7 :tabn 7<cr>
+noremap <silent><leader>8 :tabn 8<cr>
+noremap <silent><leader>9 :tabn 9<cr>
+noremap <silent><leader>0 :tabn 10<cr>
+noremap <C-u> <C-r>
+
 
 vnoremap <BS> d
 vnoremap <C-c> "+y
@@ -71,45 +94,36 @@ exe 'vnoremap <script> <C-V>' paste#paste_cmd['v']
 " =====================================================================================================================================
 " Genzoeral {{{
 
-set nocompatible "ÆôÓÃËùÓĞÀ©Õ¹¹¦ÄÜ
-set noswapfile " ½ûÓÃ½»»»ÎÄ¼ş
-set history=100 " ¿ÉÒÔºóÍËµÄ²½Öè
-set autochdir " ¸ù¾İ±à¼­µÄÎÄ¼ş×Ô¶¯ÇĞ»»¹¤×÷Ä¿Â¼
-set whichwrap=b,s,<,>,[,] " ×óÓÒ¼ıÍ·¼üÔÚÓöµ½ĞĞµÄ±ß½çÊ±¿ÉÒÔ×ªĞĞ
-set nobomb " È¥µôboom
-set backspace=indent,eol,start whichwrap+=<,>,[,] " ¸Ä±äÉ¾³ı¼üÉ¾³ıµ½ĞĞÊ×µÄĞĞÎª
-set clipboard+=unnamed " Vim µÄÄ¬ÈÏ¼Ä´æÆ÷ºÍÏµÍ³¼ôÌù°å¹²Ïí
-set winaltkeys=no " ÉèÖÃ alt ¼ü²»Ó³Éäµ½²Ëµ¥À¸
+set nocompatible "å¯ç”¨æ‰€æœ‰æ‰©å±•åŠŸèƒ½
+set noswapfile " ç¦ç”¨äº¤æ¢æ–‡ä»¶
+set history=100 " å¯ä»¥åé€€çš„æ­¥éª¤
+set autochdir " æ ¹æ®ç¼–è¾‘çš„æ–‡ä»¶è‡ªåŠ¨åˆ‡æ¢å·¥ä½œç›®å½•
+set whichwrap=b,s,<,>,[,] " å·¦å³ç®­å¤´é”®åœ¨é‡åˆ°è¡Œçš„è¾¹ç•Œæ—¶å¯ä»¥è½¬è¡Œ
+set nobomb " å»æ‰boom
+set backspace=indent,eol,start whichwrap+=<,>,[,] " æ”¹å˜åˆ é™¤é”®åˆ é™¤åˆ°è¡Œé¦–çš„è¡Œä¸º
+set clipboard+=unnamed " Vim çš„é»˜è®¤å¯„å­˜å™¨å’Œç³»ç»Ÿå‰ªè´´æ¿å…±äº«
+set winaltkeys=no " è®¾ç½® alt é”®ä¸æ˜ å°„åˆ°èœå•æ 
 
-" }}}
-" =====================================================================================================================================
-" Lang & Encoding {{{
-set fileencodings=utf-8,gbk2312,gbk,gb18030,cp936
-set langmenu=zh_CN
-set encoding=utf8
-let $LANG = 'en_US.UTF-8'
 " }}}
 " =====================================================================================================================================
 " GUI {{{
+colorscheme molokai" è®¾ç½®ä¸»é¢˜
+set cursorline " çªå‡ºæ˜¾ç¤ºå½“å‰è¡Œ
+set hlsearch " é«˜äº®æ˜¾ç¤ºæœç´¢çš„è¯
+set ruler " æ‰“å¼€çŠ¶æ€æ æ ‡å°º
+set number " æ˜¾ç¤ºè¡Œå·
+set laststatus=2 " æ˜¾ç¤ºçŠ¶æ€æ  (é»˜è®¤å€¼ä¸º 1, æ— æ³•æ˜¾ç¤ºçŠ¶æ€æ )  
+set lines=35 columns=140 " çª—å£å¤§å°
+set vb t_vb=  " å…³é—­å£°éŸ³
+au GuiEnter * set t_vb= " å…³é—­é—ªå±
 
-colorscheme darkblue " ÉèÖÃÖ÷Ìâ
-set cursorline " Í»³öÏÔÊ¾µ±Ç°ĞĞ
-set hlsearch " ¸ßÁÁÏÔÊ¾ËÑË÷µÄ´Ê
-set ruler " ´ò¿ª×´Ì¬À¸±ê³ß
-set number " ÏÔÊ¾ĞĞºÅ
-set laststatus=2 " ÏÔÊ¾×´Ì¬À¸ (Ä¬ÈÏÖµÎª 1, ÎŞ·¨ÏÔÊ¾×´Ì¬À¸)  
-set lines=35 columns=140 " ´°¿Ú´óĞ¡
+set splitbelow " åˆ†å‰²å‡ºæ¥çš„çª—å£ä½äºå½“å‰çª—å£ä¸‹è¾¹
+set splitright " åˆ†å‰²å‡ºæ¥çš„çª—å£ä½äºå½“å‰çª—å£å³è¾¹
+set ignorecase smartcase " æœç´¢æ—¶å¿½ç•¥å¤§å°å†™ï¼Œä½†åœ¨æœ‰ä¸€ä¸ªæˆ–ä»¥ä¸Šå¤§å†™å­—æ¯æ—¶ä»ä¿æŒå¯¹å¤§å°å†™æ•æ„Ÿ
+set incsearch " è¾“å…¥æœç´¢å†…å®¹æ—¶å°±æ˜¾ç¤ºæœç´¢ç»“æœ
+set magic " è®¾ç½®é­”æœ¯
 
-set vb t_vb=  " ¹Ø±ÕÉùÒô
-au GuiEnter * set t_vb= " ¹Ø±ÕÉÁÆÁ
-
-set splitbelow " ·Ö¸î³öÀ´µÄ´°¿ÚÎ»ÓÚµ±Ç°´°¿ÚÏÂ±ß
-set splitright " ·Ö¸î³öÀ´µÄ´°¿ÚÎ»ÓÚµ±Ç°´°¿ÚÓÒ±ß
-set ignorecase smartcase " ËÑË÷Ê±ºöÂÔ´óĞ¡Ğ´£¬µ«ÔÚÓĞÒ»¸ö»òÒÔÉÏ´óĞ´×ÖÄ¸Ê±ÈÔ±£³Ö¶Ô´óĞ¡Ğ´Ãô¸Ğ
-set incsearch " ÊäÈëËÑË÷ÄÚÈİÊ±¾ÍÏÔÊ¾ËÑË÷½á¹û
-set magic " ÉèÖÃÄ§Êõ
-
-"²»ÏÔÊ¾¹¤¾ß/²Ëµ¥À¸
+"ä¸æ˜¾ç¤ºå·¥å…·/èœå•æ 
 set guioptions-=T
 set guioptions-=m
 set guioptions-=L
@@ -117,19 +131,20 @@ set guioptions-=r
 set guioptions-=b
 set guioptions-=e
 set nolist
-
+"set guifont=Courier\ New:h12
+set guifont=Consolas\ for\ Powerline\ FixedD:h11,Monoid\ Nerd\ Font\ Mono:h11"config font for gvim â€for gvim
 " }}}
 " =====================================================================================================================================
 " Format {{{
 
-syntax on " ×Ô¶¯Óï·¨¸ßÁÁ
-set matchtime=2 " ¶ÌÔİÌø×ªµ½Æ¥ÅäÀ¨ºÅµÄÊ±¼ä
-set smartindent " ¿ªÆôĞÂĞĞÊ±Ê¹ÓÃÖÇÄÜ×Ô¶¯Ëõ½ø
-set showmatch " ²åÈëÀ¨ºÅÊ±£¬¶ÌÔİµØÌø×ªµ½Æ¥ÅäµÄ¶ÔÓ¦À¨ºÅ 
-set shiftwidth=4 " Éè¶¨ << ºÍ >> ÃüÁîÒÆ¶¯Ê±µÄ¿í¶ÈÎª 4  
-set tabstop=4 " Éè¶¨ tab ³¤¶ÈÎª 4  
-set softtabstop=4 " Ê¹µÃ°´ÍË¸ñ¼üÊ±¿ÉÒÔÒ»´ÎÉ¾µô 4 ¸ö¿Õ¸ñ  
-set autoindent "×Ô¶¯Ëõ½ø
+syntax on " è‡ªåŠ¨è¯­æ³•é«˜äº®
+set matchtime=2 " çŸ­æš‚è·³è½¬åˆ°åŒ¹é…æ‹¬å·çš„æ—¶é—´
+set smartindent " å¼€å¯æ–°è¡Œæ—¶ä½¿ç”¨æ™ºèƒ½è‡ªåŠ¨ç¼©è¿›
+set showmatch " æ’å…¥æ‹¬å·æ—¶ï¼ŒçŸ­æš‚åœ°è·³è½¬åˆ°åŒ¹é…çš„å¯¹åº”æ‹¬å· 
+set shiftwidth=4 " è®¾å®š << å’Œ >> å‘½ä»¤ç§»åŠ¨æ—¶çš„å®½åº¦ä¸º 4  
+set tabstop=4 " è®¾å®š tab é•¿åº¦ä¸º 4  
+set softtabstop=4 " ä½¿å¾—æŒ‰é€€æ ¼é”®æ—¶å¯ä»¥ä¸€æ¬¡åˆ æ‰ 4 ä¸ªç©ºæ ¼  
+set autoindent "è‡ªåŠ¨ç¼©è¿›
 set expandtab
 set foldmethod=indent
 
@@ -138,56 +153,99 @@ set foldmethod=indent
 " Plugin {{{
 
 filetype off 
-set rtp+=E:\VIM\vim81\bundle\vundle " ´Ë´¦¹æ¶¨VundleµÄÂ·¾¶  
-call vundle#begin('E:\VIM\vim81\bundle') " ±ØĞë
+set rtp+=E:\VIM\vim81\bundle\vundle " æ­¤å¤„è§„å®šVundleçš„è·¯å¾„  
+call vundle#begin('E:\VIM\vim81\bundle') " å¿…é¡»
 
-Plugin 'VundleVim/Vundle.vim' " ÈÃvundle¹ÜÀí²å¼ş°æ±¾
-Plugin 'scrooloose/nerdtree' " ¼ÓÈëÄ¿Â¼¹ÜÀí
-Plugin 'yegappan/mru' " ×Ô¶¯»Ö¸´ÉÏ´Î¹¤×÷µÄ×´Ì¬
+Plugin 'VundleVim/Vundle.vim' " è®©vundleç®¡ç†æ’ä»¶ç‰ˆæœ¬
+Plugin 'scrooloose/nerdtree' " åŠ å…¥ç›®å½•ç®¡ç†
 Plugin 'junegunn/fzf' 
 Plugin 'junegunn/fzf.vim' 
+" Plugin 'w0rp/ale' 
+Plugin 'vim-airline/vim-airline'
+Plugin 'scrooloose/nerdcommenter'
 
 call vundle#end()  
 
-
-filetype plugin indent on " ±ØĞë ¼ÓÔØvim×Ô´øºÍ²å¼şÏàÓ¦µÄÓï·¨ºÍÎÄ¼şÀàĞÍÏà¹Ø½Å±¾
-" ³£ÓÃµÄÃüÁî
-" :PluginList        - ÁĞ³öËùÓĞÒÑÅäÖÃµÄ²å¼ş
-" :PluginInstall     - °²×°²å¼ş,×·¼Ó `!` ÓÃÒÔ¸üĞÂ»òÊ¹ÓÃ :PluginUpdate
-" :PluginSearch foo  - ËÑË÷ foo ; ×·¼Ó `!` Çå³ı±¾µØ»º´æ
-" :PluginClean       - Çå³ıÎ´Ê¹ÓÃ²å¼ş,ĞèÒªÈ·ÈÏ; ×·¼Ó `!` ×Ô¶¯Åú×¼ÒÆ³ıÎ´Ê¹ÓÃ²å¼ş
+filetype plugin indent on " å¿…é¡» åŠ è½½vimè‡ªå¸¦å’Œæ’ä»¶ç›¸åº”çš„è¯­æ³•å’Œæ–‡ä»¶ç±»å‹ç›¸å…³è„šæœ¬
+" å¸¸ç”¨çš„å‘½ä»¤
+" :PluginList        - åˆ—å‡ºæ‰€æœ‰å·²é…ç½®çš„æ’ä»¶
+" :PluginInstall     - å®‰è£…æ’ä»¶,è¿½åŠ  `!` ç”¨ä»¥æ›´æ–°æˆ–ä½¿ç”¨ :PluginUpdate
+" :PluginSearch foo  - æœç´¢ foo ; è¿½åŠ  `!` æ¸…é™¤æœ¬åœ°ç¼“å­˜
+" :PluginClean       - æ¸…é™¤æœªä½¿ç”¨æ’ä»¶,éœ€è¦ç¡®è®¤; è¿½åŠ  `!` è‡ªåŠ¨æ‰¹å‡†ç§»é™¤æœªä½¿ç”¨æ’ä»¶
 
 " }}}
 " =====================================================================================================================================
 " Plugin-set{{{
 
 " NERDTree
-let NERDTreeShowBookmarks=1 " ÏÔÊ¾ÊéÇ©Ò³
-let NERDTreeWinPos="right"   "½« NERDTree µÄ´°¿ÚÉèÖÃÔÚ vim ´°¿ÚµÄÓÒ²à£¨Ä¬ÈÏÎª×ó²à£©
-let NERDChristmasTree=1 "ÈÃTree°Ñ×Ô¼º¸ø×°ÊÎµÃ¶à×Ë¶à²ÊÆ¯ÁÁµã
-let NERDTreeAutoCenter=1 " ¿ØÖÆµ±¹â±êÒÆ¶¯³¬¹ıÒ»¶¨¾àÀëÊ±£¬ÊÇ·ñ×Ô¶¯½«½¹µãµ÷Õûµ½ÆÁÖĞĞÄ
-let NERDTreeMouseMode=2 " Ö¸¶¨Êó±êÄ£Ê½£¨1.Ë«»÷´ò¿ª£»2.µ¥Ä¿Â¼Ë«ÎÄ¼ş£»3.µ¥»÷´ò¿ª£©
-let NERDTreeShowFiles=1 " ÊÇ·ñÄ¬ÈÏÏÔÊ¾ÎÄ¼ş
-let NERDTreeShowHidden=0 " ÊÇ·ñÄ¬ÈÏÏÔÊ¾Òş²ØÎÄ¼ş
-let NERDTreeWinSize=31 " ´°¿Ú¿í
-let NERDTreeIgnore = ['\.log$'] " ÉèÖÃºöÊÓµÄÎÄ¼şÃû
-" let g:NERDTreeDirArrowExpandable = '?'
-" let g:NERDTreeDirArrowCollapsible = '?'
+let g:NERDTree_title="[NERDTree]"  
+function! NERDTree_Start()  
+    exec 'NERDTree'  
+endfunction  
+function! NERDTree_IsValid()  
+    return 1  
+endfunction  
+let g:NERDTreeDirArrowExpandable = 'â–¸'
+let g:NERDTreeDirArrowCollapsible = 'â–¾'
+let NERDTreeShowBookmarks=1 " æ˜¾ç¤ºä¹¦ç­¾é¡µ
+let NERDTreeWinPos="left"   "å°† NERDTree çš„çª—å£è®¾ç½®åœ¨ vim çª—å£çš„å³ä¾§ï¼ˆé»˜è®¤ä¸ºå·¦ä¾§ï¼‰
+let NERDChristmasTree=1 "è®©TreeæŠŠè‡ªå·±ç»™è£…é¥°å¾—å¤šå§¿å¤šå½©æ¼‚äº®ç‚¹
+let NERDTreeAutoCenter=1 " æ§åˆ¶å½“å…‰æ ‡ç§»åŠ¨è¶…è¿‡ä¸€å®šè·ç¦»æ—¶ï¼Œæ˜¯å¦è‡ªåŠ¨å°†ç„¦ç‚¹è°ƒæ•´åˆ°å±ä¸­å¿ƒ
+let NERDTreeMouseMode=2 " æŒ‡å®šé¼ æ ‡æ¨¡å¼ï¼ˆ1.åŒå‡»æ‰“å¼€ï¼›2.å•ç›®å½•åŒæ–‡ä»¶ï¼›3.å•å‡»æ‰“å¼€ï¼‰
+let NERDTreeShowFiles=1 " æ˜¯å¦é»˜è®¤æ˜¾ç¤ºæ–‡ä»¶
+let NERDTreeShowHidden=0 " æ˜¯å¦é»˜è®¤æ˜¾ç¤ºéšè—æ–‡ä»¶
+let NERDTreeWinSize=30 " çª—å£å®½
+let NERDTreeIgnore = ['\.log$'] " è®¾ç½®å¿½è§†çš„æ–‡ä»¶å
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
 
 " Taglist
-"let Tlist_Auto_Open=1
-set tags=tags
-"set autochdir
+let Tlist_Show_One_File=1  
+let Tlist_Exit_OnlyWindow=1  
+let Tlist_Use_Left_Window=1  
+
+" WinMannager
+"let g:winManagerWindowLayout='TagList|FileExplorer'  
+let g:winManagerWindowLayout='NERDTree|TagList'  
+let g:winManagerWidth = 30  
+let g:AutoOpenWinManager =0  
+map <leader>w :WMToggle<cr>  
+
+" airline
+let g:airline_theme="molokai"
+let g:airline_powerline_fonts = 1  
+ "æ‰“å¼€tablineåŠŸèƒ½,æ–¹ä¾¿æŸ¥çœ‹Bufferå’Œåˆ‡æ¢,çœå»äº†minibufexplæ’ä»¶
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+"è®¾ç½®åˆ‡æ¢Bufferå¿«æ·é”®"
+nnoremap <C-tab> :bn<CR>
+nnoremap <C-s-tab> :bp<CR>
+ " å…³é—­çŠ¶æ€æ˜¾ç¤ºç©ºç™½ç¬¦å·è®¡æ•°
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#whitespace#symbol = '!'
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_left_sep = 'â®€'
+let g:airline_left_alt_sep = 'â®'
+let g:airline_right_sep = 'â®‚'
+let g:airline_right_alt_sep = 'â®ƒ'
+let g:airline_symbols.branch = 'â­ '
+let g:airline_symbols.readonly = 'â­¤'
+
 
 " }}}
 " =====================================================================================================================================
 " Auto {{{
 
-" Æô¶¯vim×Ô¶¯×î´ó»¯
+" å¯åŠ¨vimè‡ªåŠ¨æœ€å¤§åŒ–
 autocmd GUIEnter * simalt ~x
 
-" ×Ô¶¯Æô¶¯NERDTree
-autocmd VimEnter * NERDTree
+" è‡ªåŠ¨å¯åŠ¨NERDTree
+"autocmd VimEnter * NERDTree
+
+" è‡ªåŠ¨å¯åŠ¨Tlist
+"autocmd VimEnter * Tlist
 
 " }}}
 " =====================================================================================================================================
@@ -202,7 +260,10 @@ endfunction
 
 autocmd! User FzfStatusLine call <SID>fzf_statusline()
 " }}}
+" =====================================================================================================================================
 " TearDown{{{
-set nobackup " ¸²¸ÇÎÄ¼şÊ±²»±¸·İ
-set backupcopy=yes " ÉèÖÃ±¸·İÊ±µÄĞĞÎªÎª¸²¸Ç 
+set nobackup " è¦†ç›–æ–‡ä»¶æ—¶ä¸å¤‡ä»½
+set backupcopy=yes " è®¾ç½®å¤‡ä»½æ—¶çš„è¡Œä¸ºä¸ºè¦†ç›– 
+packloadall
+silent! helptags ALL
 " }}}
